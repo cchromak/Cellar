@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from '../components/Post';
 import Loading from '../components/Loading';
+import Item from '../components/Item';
 
 
 class PostsListPage extends React.Component {
@@ -30,6 +31,7 @@ class PostsListPage extends React.Component {
       <div className="container-fluid text-center">
         <div className="row justify-content-center">
           { this.state.posts }
+          <Item />
         </div>
       </div>
     );

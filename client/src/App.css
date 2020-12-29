@@ -21,3 +21,97 @@
   color: #09d3ac;
 }
 */
+
+/* Temp until table's replaced */
+.inventory-table{
+  border: 2px solid black;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: green;
+}
+modal {
+  background-color: white;
+}
+th, td{
+  border-right: 2px solid black;
+  padding-left: 2px;
+  padding-right: 3px;
+}
+
+.nav {
+  color: white;
+  padding: 5px;
+}
+
+h5 span, .showcase {
+ /* // background-color: rgb(188, 188, 248); */
+  padding: 5px;
+  border: #c1b7ca;
+  border-style: solid;
+  color: #7e6d8e;
+  border-radius: 5px;
+  border-width: 1px;
+  
+}
+
+
+.itemList {
+  padding-bottom: 20px;
+}
+
+.nav:hover {
+  background-color: rgb(188, 188, 248);
+
+}
+
+.about-image {
+  max-width: 250px;
+  padding-top: 0px;
+  border-radius: 25%;
+  border:  #7e6d8e;
+  border-style: solid;
+  border-width: 1px;
+}
+
+
+
+.nav:focus, .item:focus {
+  outline: none;
+  box-shadow: none
+}
+
+.modal-header {
+  background-color:#B39BC8;
+  color:white;
+}
+
+.user-card {
+
+    height: auto;
+    max-height: 250px;
+    width: auto;
+    max-width: 250px;
+    padding: 25px;
+    display:flex;
+    align-items:space-between;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.about-header{
+  font-size: 50px;
+}
+
+.about-sub-header{
+  font-size: 35px;
+}
+
+.aboutUs {
+  font-size: 20px;
+}
