@@ -3,24 +3,26 @@ import Item from './Item';
 
 
 class ItemList extends React.Component {
-    constructor(props){
-        super(props)
-    }
+    
     render() {
         let List = []
         for (let i = 0; i < this.props.items.length; i++) {
-            List.push(
-                <Item itemContent={this.props.items[i]}/>
+            if (this.props.category === this.props.items[i].category) {
+                List.push(
+                <Item key={i+i%this.props.items.length}reloadContent={this.props.reloadContent} itemContent={this.props.items[i]} user={this.props.user} refreshPage={this.props.refreshPage}/>
             );
+            }
+            
         }
         
         return (
-            <div>
-                <div>
-                    <p>Video Games</p>
-                </div>
-                <div class="container-fluid ">
-                    <div class="row flex-nowrap overflow-auto">
+            <div className="itemList">
+                <div className="container-fluid ">
+                    <div className="text-left">
+                        <h5><span>{ this.props.category }</span></h5>
+                    </div>
+                    
+                    <div className="row flex-nowrap overflow-auto">
                         { List }
                     </div>
                 </div>

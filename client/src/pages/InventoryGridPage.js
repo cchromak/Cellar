@@ -1,43 +1,77 @@
 import React from 'react';
-import ItemList from '../components/ItemList';
 import UserInfo from '../components/UserInfo';
 import ItemListBox from '../components/ItemListBox';
-
-
+import Loading from '../components/Loading'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 class InventoryGridPage extends React.Component {
   constructor(props){
     super(props)
     this.state={
-      itemsList:''
+      itemsList:'',
+      userList: '',
     }
+    this.refreshPage = this.refreshPage.bind(this)
   }
+  
+ refreshPage(){
+   this.componentDidMount()
+  
+ }
   componentDidMount() {
-    fetch("/api/inv/")
-    .then(res => res.json())
-    .then(post => {
-    //alert(post.length)
-      this.setState({itemsList:post}) 
-    })
-  }
+    Promise.all([fetch("/api/inv/"), fetch('/api/loggedInUser/')])
+      .then(([inv, user]) => { return Promise.all([inv.json(), user.json()]) })
+      .then(([inv, user]) => {
+        this.setState({itemsList: inv, userList: user})
+ 
+      })
+      .catch(err => {
+        console.log("error")
+      });
+}
+
 
   
     render(){
       let renderedContent
-      if(!this.state.itemsList.length){
-        renderedContent= (<span><UserInfo /></span>)
+      if(!this.state.itemsList.length && !this.state.userList.length){
+        renderedContent= (<span><Loading/></span>)
       }
-      else{
+      else if (this.state.itemsList.length ===0){
         renderedContent=  (  
-        <div className="row flex-nowrap justify-content-md-center">
-        <div className="justify-left">
-            <UserInfo />
+          <div>
+          <Container>
+            <Row>
+              <Col sm={4}>
+              <div style={{textAlign:"center"}}>
+        <h1 style={{wordWrap:"break-word"}}>Welcome, {this.state.userList[0].userName}</h1> 
+        <UserInfo reloadContent ={this.refreshPage} list={ this.state.userList[0] }/>
         </div>
-        <div style={{maxWidth: "1000px"}}>
-  
-            <ItemListBox list={this.state.itemsList}/>
-
+              </Col>
+            </Row>
+          </Container>
+         
+      </div>
+      )
+      }
+      else {
+        renderedContent=  (  
+        <Container>
+        <Row>
+        <Col sm={4}>
+        <div style={{textAlign:"center"}}>
+        <h2 style={{wordWrap:"break-word"}}>Welcome, {this.state.userList[0].userName}</h2> 
+        <UserInfo reloadContent ={this.refreshPage} list={ this.state.userList[0] }/>
         </div>
-    </div>
+        </Col>
+        <Col sm={8}>
+        
+        <ItemListBox reloadContent={this.refreshPage} list={this.state.itemsList} user={this.state.userList} refreshPage ={this.refreshPage}/>
+        
+        </Col>
+        </Row>
+        </Container>
     )
     
       }
@@ -46,9 +80,9 @@ class InventoryGridPage extends React.Component {
     
   
   return (
-    renderedContent
-    
-
+    <div style={{padding: "50px"}}>
+      { renderedContent }
+    </div>
   );
   }
 }

@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         }
       },
+      category: {
+        type: DataTypes.STRING,
+
+      },
       quantity:{
         type: DataTypes.INTEGER,
         validate: {
@@ -45,6 +49,12 @@ module.exports = (sequelize, DataTypes) => {
           validate:{
               notEmpty:true,
           }  
+       },
+       imageURL:{
+         type:DataTypes.STRING,
+       },
+       imageID:{
+        type:DataTypes.STRING,
        },
        public:{
         type: DataTypes.BOOLEAN,

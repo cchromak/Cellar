@@ -17,19 +17,20 @@ function passwordsMatch(submittedPassword, storedPasswordHash) {
   BEST PRACTICE: don't state why login failed to the user.
 */
 passport.use(new LocalStrategy({
-    usernameField: 'userEmail',
-    passwordField: 'userPassword',
+    usernameField: 'email',
+    passwordField: 'password',
   },
-  (userEmail, userPassword, done) => {
-      console.log(userEmail)
-    Users.findOne({ where: { userEmail } })
+  (email, password, done) => {
+    
+     
+    Users.findOne({ where: { userEmail:email } })
       .then((user) => {
         if(!user) {
           console.log('\n\nFailed Login: user does not exist\n\n');
           return done(null, false, { message: 'Failed Login' });
         }
 
-        if(passwordsMatch(userPassword, user.userPasswordHash) === false) {
+        if(passwordsMatch(password, user.userPasswordHash) === false) {
           console.log('\n\nFailed Login: passwords did not match\n\n');
           return done(null, false, { message: 'Failed Login' });
         }

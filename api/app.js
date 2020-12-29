@@ -8,6 +8,7 @@ const path = require('path');
 const db = require('./models');
 const passport = require('./middlewares/authentication');
 const app = express();
+const cloudinary = require('cloudinary').v2
 const PORT = process.env.PORT || 8080;
 
 
@@ -18,7 +19,11 @@ app.use(bodyParser.json())
 app.use(expressSession({ 
   secret: process.env.SESSION_SECRET, 
   resave: false,
-  saveUninitialized: true }));
+  saveUninitialized: false ,
+  cookie:{
+maxAge:10000000
+  }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -41,7 +46,11 @@ if(process.env.NODE_ENV==='production') {
 
 // update DB tables based on model updates. Does not handle renaming tables/columns
 // NOTE: toggling this to true drops all tables (including data)
-db.sequelize.sync({ force: false });
-
+db.sequelize.sync({ force: false});
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET, 
+});
 // start up the server
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

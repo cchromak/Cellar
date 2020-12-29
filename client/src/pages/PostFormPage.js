@@ -68,6 +68,7 @@ class PostFormPage extends React.Component {
           <button className="btn btn-primary" onClick={this.savePost}>Save Post</button>
         </div>
       </div>
+     
     );
   }
 }

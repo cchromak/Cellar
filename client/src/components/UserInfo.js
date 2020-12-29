@@ -6,28 +6,31 @@ class UserInfo extends React.Component {
   constructor(props){
     super(props)
     this.state={
-      showModal:false
+      showModal:false,
     }
     this.toggleModal = this.handleSelect.bind(this)
     this.submit = this.handleSubmission.bind(this)
   }
+  
   handleSelect(){
     this.setState({
       showModal: this.state.showModal ? false : true
     })
   }
-  handleSubmission(name,quant,initPrice,currPrice,date,desc,pub){
+
+  handleSubmission(name,category,quant,initPrice,currPrice,date,desc,pub){
     
     let jsonToSend= {
       name:name,
+      category:category,
       quantity:quant,
       dateAdded: date,
       purchasePrice: initPrice,
       currentPrice: currPrice,
       description: desc,
-      public:pub
+      pub: pub
     }
-    console.log(JSON.stringify(jsonToSend))
+   
     fetch("/api/inv/", {
       method: 'POST',
       credentials: 'include',
@@ -45,30 +48,33 @@ class UserInfo extends React.Component {
       })
       .then(post => {
         alert("Success!")
+        this.props.refreshPage();
         this.setState({
           showModal:false
         })
+       
       })
       .catch(err => {
         alert("error :3")
       });
+      
   }
     render () {
+   
+     
     return (
-      <div style={{width: "200px", padding: "20px"}}>
-        <div className="card" >
-          <img className="card-img-top" src=".." alt="userImage.jpg"></img>
+      <div style={{padding:"10px", }}>
+        <div className="card" style={{background: "white",}}>
+          <img className="card-img-top" src={this.props.list.imageURL} alt="userImage.jpg"></img>
           <ul className="list-group list-group-flush">
-    <li className="list-group-item">steve </li>
-            <li class="list-group-item">User Email</li> 
+            <li className="list-group-item"> {this.props.list.userName } </li>
+            <li className="list-group-item"> {this.props.list.userEmail} </li> 
           </ul>
           <div className="card-body">
-            <p>badge</p>
-            <p>badge</p>
-            <p>badge</p>
-            <p>badge</p>
-            <AddItemModal show={this.state.showModal} hide= {this.toggleModal} submission={this.submit}></AddItemModal>
-            <button onClick={this.toggleModal}>Add Item</button>
+            <p>badges</p>
+    
+            <AddItemModal reloadContent={this.props.reloadContent} edit={false}show={this.state.showModal} hide= {this.toggleModal} submission={this.submit}></AddItemModal>
+            <button onClick={this.toggleModal} className="btn btn-info">Add Item</button>
           </div>
         </div>
       </div>

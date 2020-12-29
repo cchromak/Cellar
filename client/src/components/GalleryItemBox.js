@@ -1,19 +1,20 @@
 import React from "react";
 import Item from "./Item";
 
-class LandingPageItemBox extends React.Component {
-    
+class GalleryItemBox extends React.Component {
+
+
     render () {
         let box = []
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < this.props.list.length; i++) {
             if (this.props.list[i] != null) {
             box.push(
-                <Item key={i+i%8}  itemContent={this.props.list[i]}/>
+                <Item key={i+i%this.props.list.length} itemContent={this.props.list[i]}/>
             );
             }
         }
         return (
-            <div className="container">
+            <div className="container" style={{padding: "40px"}}>
                 <div className="row justify-content-center">
                     <div className="col">
                         
@@ -32,4 +33,4 @@ class LandingPageItemBox extends React.Component {
 
 }
 
-export default LandingPageItemBox;
+export default GalleryItemBox;
