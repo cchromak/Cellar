@@ -52,8 +52,8 @@ class InventoryTable extends React.Component {
                 align:'right'
             },
             {
-                id:'price_bought',
-                label:'Price Bought',
+                id:'current_price',
+                label:'Current Price',
                 minWidth:170,
                 align:'right'
             }

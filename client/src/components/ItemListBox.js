@@ -16,7 +16,6 @@ class ItemListBox extends React.Component {
         this.setState({
             tableToggle: this.state.tableToggle ? false : true
         })
-        console.log(this.state.tableToggle)
     }
 
    
