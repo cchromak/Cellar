@@ -7,6 +7,14 @@ import {
   Link,
   NavLink
 } from 'react-router-dom';
+
+import PostsListPage from './pages/PostsListPage';
+import PostFormPage from './pages/PostFormPage';
+import ShowPostPage from './pages/ShowPostPage';
+import AboutUsPage from './pages/AboutUsPage';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+
 import './App.css';
 import LandingPage from './pages/LandingPage';
 import AboutUsPage from './pages/AboutUsPage';
@@ -115,7 +123,28 @@ render(){
     </div>
   );
 }
+
+function LoginModal(props){
+  console.log(props.toggleModal)
+  return(<Modal show={props.show} onHide={props.hide}>
+    <Modal.Header closeButton>
+      <Modal.Title>Modal title</Modal.Title>
+    </Modal.Header>
+  
+    <Modal.Body>
+      <p>Modal body text goes here.</p>
+    </Modal.Body>
+  
+    <Modal.Footer>
+      <Button variant="secondary">Close</Button>
+      <Button variant="primary">Save changes</Button>
+    </Modal.Footer>
+  </Modal>
+  );
 }
+
+}
+
 
 
 class App extends React.Component {
@@ -146,9 +175,16 @@ class App extends React.Component {
     return (
       <div>
         <Router>
+
+          <Navigation toggler={this.toggleModal}/>
+         
+
           <Navigation  auth={this.comp}/>
+
           <div className="container-fluid text-center">
+         
             <div className="row justify-content-center">
+            <LoginModal show={this.state.showModal} hide= {this.toggleModal}></LoginModal>
               <Switch>
                 <Route path="/landing" render={props => ( <LandingPage {...props} login={this.state.login} /> )}/>
                 <Route path="/aboutUs" component={AboutUsPage} />
