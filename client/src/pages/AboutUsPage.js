@@ -5,6 +5,22 @@ import Container from 'react-bootstrap/Container'
 import {  BrowserRouter as Link } from 'react-router-dom';
 function AboutUsPage(props) {
   return (
+
+    <div>
+      {/* Center All */}
+      {/* Bold , Larger Font*/}
+      Welcome to Cellar.
+
+      {/* Bold, Large Font */}
+      What is Cellar?
+
+      {/* Smaller font */}
+      Cellar is a basic inventory management system allowing you to track your collections and their details, including quantity, the price an item was purchased for, and the price of the item at the time it was added to your collection.abs
+
+      Cellar is a great way to track your items, with its simple, user friendly interface.
+         {/* Screenshot, float right or keep in center  */}
+      
+
     <div style={{padding: "50px"}}>
       {/* Center All */}
       {/* Bold , Larger Font*/}
@@ -48,6 +64,7 @@ function AboutUsPage(props) {
       
       
     
+
     </div>
     
   );
